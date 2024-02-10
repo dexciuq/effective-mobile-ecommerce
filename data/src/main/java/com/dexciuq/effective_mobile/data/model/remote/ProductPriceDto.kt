@@ -1,8 +1,8 @@
-package com.dexciuq.effective_mobile.data.model
+package com.dexciuq.effective_mobile.data.model.remote
 
 import com.google.gson.annotations.SerializedName
 
-data class Price(
+data class ProductPriceDto(
     @SerializedName("price")
     val price: String,
     @SerializedName("discount")

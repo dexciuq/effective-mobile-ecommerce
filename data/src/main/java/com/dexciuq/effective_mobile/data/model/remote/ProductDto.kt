@@ -1,8 +1,8 @@
-package com.dexciuq.effective_mobile.data.model
+package com.dexciuq.effective_mobile.data.model.remote
 
 import com.google.gson.annotations.SerializedName
 
-data class Item(
+data class ProductDto(
     @SerializedName("id")
     val id: String,
     @SerializedName("title")
@@ -10,9 +10,9 @@ data class Item(
     @SerializedName("subtitle")
     val subtitle: String,
     @SerializedName("price")
-    val price: Price,
+    val price: ProductPriceDto,
     @SerializedName("feedback")
-    val feedback: Feedback,
+    val feedback: ProductFeedbackDto,
     @SerializedName("tags")
     val tags: List<String>,
     @SerializedName("available")
@@ -20,7 +20,7 @@ data class Item(
     @SerializedName("description")
     val description: String,
     @SerializedName("info")
-    val info: List<Info>,
+    val info: List<ProductInfoDto>,
     @SerializedName("ingredients")
     val ingredients: String
 )
