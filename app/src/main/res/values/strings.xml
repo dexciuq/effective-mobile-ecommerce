@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Effective Mobile</string>
+    <string name="home">Главная</string>
+    <string name="catalog">Каталог</string>
+    <string name="cart">Корзина</string>
+    <string name="discount">Акции</string>
+    <string name="profile">Профиль</string>
+    <string name="register">Вход</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="phone">Номер телефона</string>
+    <string name="login">Войти</string>
+    <string name="register_warning">Нажимая кнопку “Войти”, Вы принимаете\n<u>условия программы лояльности</u></string>
 </resources>
