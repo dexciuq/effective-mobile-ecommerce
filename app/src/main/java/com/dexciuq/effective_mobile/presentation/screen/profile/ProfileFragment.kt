@@ -13,10 +13,9 @@ import com.dexciuq.effective_mobile.R
 import com.dexciuq.effective_mobile.common.Resource
 import com.dexciuq.effective_mobile.databinding.FragmentProfileBinding
 import com.dexciuq.effective_mobile.presentation.screen.register.RegisterActivity
-import com.dexciuq.effective_mobile.presentation.screen.register.RegisterViewModel
-import com.dexciuq.yummy_express.common.hide
-import com.dexciuq.yummy_express.common.show
-import com.dexciuq.yummy_express.common.toast
+import com.dexciuq.effective_mobile.presentation.utils.hide
+import com.dexciuq.effective_mobile.presentation.utils.show
+import com.dexciuq.effective_mobile.presentation.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
