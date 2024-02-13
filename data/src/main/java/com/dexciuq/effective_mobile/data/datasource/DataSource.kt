@@ -12,7 +12,7 @@ interface DataSource {
 
     interface LocalDataSource {
         suspend fun getProductList(): Flow<List<Product>>
-        suspend fun getProduct(id: String): Product
+        suspend fun getProduct(id: String): Flow<Product>
         suspend fun addToFavorites(product: Product)
         suspend fun removeFromFavorites(product: Product)
         suspend fun register(user: User)

@@ -4,6 +4,7 @@ data class Product(
     val id: String,
     val title: String,
     val subtitle: String,
+    var liked: Boolean,
     val price: ProductPrice,
     val feedback: ProductFeedback,
     val tags: List<String>,

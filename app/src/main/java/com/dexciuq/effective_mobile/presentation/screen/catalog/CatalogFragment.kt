@@ -8,6 +8,7 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.dexciuq.effective_mobile.R
 import com.dexciuq.effective_mobile.common.Resource
@@ -46,23 +47,36 @@ class CatalogFragment : Fragment() {
     }
 
     private fun setupProductsRecyclerView() {
-        adapter = ProductAdapter(requireActivity())
-        adapter.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+        adapter = ProductAdapter(
+            fragmentActivity = requireActivity(),
+            onLikeClick = viewModel::addToFavorites,
+            onUnlikeClick = viewModel::removeFromFavorites,
+            onItemClick = {
+                findNavController().navigate(R.id.action_catalogFragment_to_productDetailsFragment)
+            }
+        )
+
+        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 binding.products.scrollToPosition(0)
             }
+
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 binding.products.scrollToPosition(0)
             }
+
             override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
                 binding.products.scrollToPosition(0)
             }
+
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 binding.products.scrollToPosition(0)
             }
+
             override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
                 binding.products.scrollToPosition(0)
             }
+
             override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) {
                 binding.products.scrollToPosition(0)
             }

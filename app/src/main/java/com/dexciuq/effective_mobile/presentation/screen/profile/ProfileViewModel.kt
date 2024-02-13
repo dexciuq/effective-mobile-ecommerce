@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dexciuq.effective_mobile.R
 import com.dexciuq.effective_mobile.common.Resource
-import com.dexciuq.effective_mobile.domain.usecase.product.GetProductListUseCase
+import com.dexciuq.effective_mobile.domain.model.User
+import com.dexciuq.effective_mobile.domain.usecase.product.GetFavoriteListUseCase
 import com.dexciuq.effective_mobile.domain.usecase.user.GetUserUseCase
 import com.dexciuq.effective_mobile.domain.usecase.user.LogoutUserUseCase
 import com.dexciuq.effective_mobile.domain.usecase.user.SetAuthSkipUseCase
@@ -18,23 +19,44 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
+    private val getFavoriteListUseCase: GetFavoriteListUseCase,
     private val getUserUseCase: GetUserUseCase,
     private val logoutUserUseCase: LogoutUserUseCase,
     private val setAuthSkipUseCase: SetAuthSkipUseCase,
 ) : ViewModel() {
 
+    private val _favorites = MutableStateFlow(0)
+    private val _user = MutableStateFlow(User(name = "", surname = "", phoneNumber = ""))
+
     private val _profile = MutableStateFlow<Resource<List<ProfileAdapterModel>>>(Resource.Loading)
     val profile = _profile.asStateFlow()
 
-    fun getProfile() = viewModelScope.launch {
+    init {
+        getUserInfo()
+        getFavoriteList()
+    }
+
+    private fun getFavoriteList() = viewModelScope.launch {
+        getFavoriteListUseCase().collect {
+            if (it is Resource.Success) {
+                _favorites.value = it.data.size
+                getProfile()
+            }
+        }
+    }
+
+    private fun getUserInfo() = viewModelScope.launch {
+        _user.value = getUserUseCase()
+    }
+
+    private fun getProfile() = viewModelScope.launch {
         val profileAdapterModels = mutableListOf<ProfileAdapterModel>()
-        val user = getUserUseCase()
 
         profileAdapterModels.add(
             ProfileInfo(
                 icon = R.drawable.ic_profile,
-                title = "${user.name} ${user.surname}",
-                description = user.phoneNumber,
+                title = "${_user.value.name} ${_user.value.surname}",
+                description = _user.value.phoneNumber,
                 endIcon = R.drawable.ic_logout,
             )
         )
@@ -43,7 +65,7 @@ class ProfileViewModel @Inject constructor(
             ProfileInfo(
                 icon = R.drawable.ic_love,
                 title = "Избранное",
-                description = "1 товар",
+                description = "${_favorites.value} товар",
                 endIcon = R.drawable.ic_next
             )
         )

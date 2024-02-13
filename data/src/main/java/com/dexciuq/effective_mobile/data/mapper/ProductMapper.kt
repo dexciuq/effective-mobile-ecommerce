@@ -21,6 +21,7 @@ internal fun ProductDto.toDomain(): Product = Product(
     description = description,
     info = info.map(ProductInfoDto::toDomain),
     ingredients = ingredients,
+    liked = false,
 )
 
 private fun ProductPriceDto.toDomain(): ProductPrice = ProductPrice(
@@ -51,6 +52,21 @@ internal fun ProductEntity.toDomain(): Product = Product(
     description = description,
     info = info,
     ingredients = ingredients,
+    liked = liked,
 )
 
 internal fun List<ProductEntity>.toDomain(): List<Product> = map(ProductEntity::toDomain)
+
+internal fun Product.toEntity(): ProductEntity = ProductEntity(
+    id = id,
+    title = title,
+    subtitle = subtitle,
+    price = price,
+    feedback = feedback,
+    tags = tags,
+    available = available,
+    description = description,
+    info = info,
+    ingredients = ingredients,
+    liked = liked,
+)

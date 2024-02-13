@@ -15,9 +15,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class ProductAdapter(
     private val fragmentActivity: FragmentActivity,
-    private val onItemClick: (Product) -> Unit = {},
     private val onLikeClick: (Product) -> Unit = {},
     private val onUnlikeClick: (Product) -> Unit = {},
+    private val onItemClick: (Product) -> Unit = {},
 ) : ListAdapter<Product, ProductAdapter.ViewHolder>(ProductDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
@@ -52,8 +52,22 @@ class ProductAdapter(
             binding.rating.text = product.feedback.rating.toString()
             binding.count.text = product.feedback.count.toCount()
 
-            binding.like.setOnClickListener {
+            if (product.liked) {
                 binding.like.setImageResource(R.drawable.ic_love_filled)
+            } else {
+                binding.like.setImageResource(R.drawable.ic_love)
+            }
+
+            binding.like.setOnClickListener {
+                if (product.liked) {
+                    product.liked = false
+                    onUnlikeClick(product)
+                    binding.like.setImageResource(R.drawable.ic_love)
+                } else {
+                    product.liked = true
+                    onLikeClick(product)
+                    binding.like.setImageResource(R.drawable.ic_love_filled)
+                }
             }
 
             binding.root.setOnClickListener { onItemClick(product) }

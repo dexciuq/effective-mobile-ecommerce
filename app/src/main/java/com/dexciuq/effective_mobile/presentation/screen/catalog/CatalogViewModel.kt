@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dexciuq.effective_mobile.common.Resource
 import com.dexciuq.effective_mobile.domain.model.Product
+import com.dexciuq.effective_mobile.domain.usecase.product.AddToFavoritesUseCase
 import com.dexciuq.effective_mobile.domain.usecase.product.GetProductListUseCase
+import com.dexciuq.effective_mobile.domain.usecase.product.RemoveFromFavoritesUseCase
 import com.dexciuq.effective_mobile.presentation.screen.catalog.filter.Sort
 import com.dexciuq.effective_mobile.presentation.screen.catalog.filter.Tag
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +18,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CatalogViewModel @Inject constructor(
-    private val getProductListUseCase: GetProductListUseCase
+    private val getProductListUseCase: GetProductListUseCase,
+    private val addToFavoritesUseCase: AddToFavoritesUseCase,
+    private val removeFromFavoritesUseCase: RemoveFromFavoritesUseCase,
 ) : ViewModel() {
 
     private lateinit var initList: List<Product>
@@ -37,6 +41,14 @@ class CatalogViewModel @Inject constructor(
                 _products.value = it
             }
         }
+    }
+
+    fun addToFavorites(product: Product) = viewModelScope.launch {
+        addToFavoritesUseCase(product)
+    }
+
+    fun removeFromFavorites(product: Product) = viewModelScope.launch {
+        removeFromFavoritesUseCase(product)
     }
 
     fun filter(sort: Sort, tag: Tag) {

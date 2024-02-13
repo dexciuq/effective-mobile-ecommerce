@@ -19,6 +19,8 @@ data class ProductEntity(
     val subtitle: String,
     @Embedded(prefix = "product_")
     val price: ProductPrice,
+    @ColumnInfo(name = "liked")
+    val liked: Boolean,
     @Embedded(prefix = "feedback_")
     val feedback: ProductFeedback,
     @ColumnInfo(name = "tags")

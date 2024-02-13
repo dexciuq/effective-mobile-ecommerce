@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
     suspend fun getProductList(): Flow<Resource<List<Product>>>
+    suspend fun getFavoriteList(): Flow<Resource<List<Product>>>
     suspend fun getProduct(id: String): Flow<Resource<Product>>
     suspend fun addToFavorites(product: Product)
     suspend fun removeFromFavorites(product: Product)

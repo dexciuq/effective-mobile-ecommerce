@@ -15,8 +15,25 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun getProductList(): Flow<Resource<List<Product>>> = flow {
         emit(Resource.Loading)
         try {
-            val productList = remoteDataSource.getProductList()
-            emit(Resource.Success(productList))
+            val remoteProductList = remoteDataSource.getProductList()
+            localDataSource.getProductList().collect {
+                val merged = remoteProductList.map { remoteProduct ->
+                    remoteProduct.liked = it.find { it.id == remoteProduct.id }?.liked ?: false
+                    remoteProduct
+                }
+                emit(Resource.Success(merged))
+            }
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
+
+    override suspend fun getFavoriteList(): Flow<Resource<List<Product>>> = flow {
+        emit(Resource.Loading)
+        try {
+            localDataSource.getProductList().collect {
+                emit(Resource.Success(it))
+            }
         } catch (t: Throwable) {
             emit(Resource.Error(t))
         }
@@ -25,20 +42,19 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun getProduct(id: String): Flow<Resource<Product>> = flow {
         emit(Resource.Loading)
         try {
-            val product = remoteDataSource.getProductList().find { it.id == id }
-                ?: error("unknown id")
-
-            emit(Resource.Success(product))
+            val product = remoteDataSource.getProduct(id)
+            localDataSource.getProduct(id).collect {
+                product.liked = it.liked
+                emit(Resource.Success(product))
+            }
         } catch (t: Throwable) {
             emit(Resource.Error(t))
         }
     }
 
-    override suspend fun addToFavorites(product: Product) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun addToFavorites(product: Product) =
+        localDataSource.addToFavorites(product)
 
-    override suspend fun removeFromFavorites(product: Product) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun removeFromFavorites(product: Product) =
+        localDataSource.removeFromFavorites(product)
 }
