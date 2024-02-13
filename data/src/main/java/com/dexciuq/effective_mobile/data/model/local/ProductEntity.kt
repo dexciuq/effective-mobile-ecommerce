@@ -19,7 +19,7 @@ internal data class ProductEntity(
     val subtitle: String,
     @Embedded(prefix = "product_")
     val price: ProductPrice,
-    @ColumnInfo(name = "feedback")
+    @Embedded(prefix = "feedback_")
     val feedback: ProductFeedback,
     @ColumnInfo(name = "tags")
     val tags: List<String>,

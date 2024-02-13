@@ -17,4 +17,8 @@ interface DataSource {
         suspend fun register(user: User)
         suspend fun getUser(): User
     }
+
+    interface PreferenceDataSource {
+
+    }
 }

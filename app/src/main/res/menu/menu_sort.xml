@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sort_popular"
+        android:title="По популярности" />
+    <item
+        android:id="@+id/sort_price_low_to_high"
+        android:title="По увеличению цены" />
+    <item
+        android:id="@+id/sort_price_high_to_low"
+        android:title="По уменьшению цены" />
+</menu>
