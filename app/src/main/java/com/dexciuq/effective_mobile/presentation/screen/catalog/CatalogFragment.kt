@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dexciuq.effective_mobile.R
 import com.dexciuq.effective_mobile.common.Resource
 import com.dexciuq.effective_mobile.databinding.FragmentCatalogBinding
+import com.dexciuq.effective_mobile.domain.model.Product
 import com.dexciuq.effective_mobile.presentation.screen.catalog.filter.Sort
 import com.dexciuq.effective_mobile.presentation.screen.catalog.filter.Tag
 import com.dexciuq.effective_mobile.presentation.utils.hide
@@ -51,9 +52,7 @@ class CatalogFragment : Fragment() {
             fragmentActivity = requireActivity(),
             onLikeClick = viewModel::addToFavorites,
             onUnlikeClick = viewModel::removeFromFavorites,
-            onItemClick = {
-                findNavController().navigate(R.id.action_catalogFragment_to_productDetailsFragment)
-            }
+            onItemClick = ::navigateToDetails
         )
 
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
@@ -82,6 +81,12 @@ class CatalogFragment : Fragment() {
             }
         })
         binding.products.adapter = adapter
+    }
+
+    private fun navigateToDetails(product: Product) {
+        findNavController().navigate(
+            CatalogFragmentDirections.actionCatalogFragmentToProductDetailsFragment(product)
+        )
     }
 
     private fun setupSortSection() {

@@ -26,7 +26,7 @@ class ProfileViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _favorites = MutableStateFlow(0)
-    private val _user = MutableStateFlow(User(name = "", surname = "", phoneNumber = ""))
+    private val _user = MutableStateFlow(User())
 
     private val _profile = MutableStateFlow<Resource<List<ProfileAdapterModel>>>(Resource.Loading)
     val profile = _profile.asStateFlow()

@@ -26,6 +26,14 @@ fun Activity.toast(message: String?) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
+fun Int.toCount() = "($this)"
+
+fun Int.toCountFeedback() = "$this отзыва"
+
+fun String.toMoney(unit: String) = "$this $unit"
+
+fun Int.toDiscountPercent() = "-$this%"
+
 fun String.getImageById(): List<Int> = imageMap[this].orEmpty()
 
 private val imageMap = mapOf(

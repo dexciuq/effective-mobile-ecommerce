@@ -10,6 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.dexciuq.effective_mobile.common.Resource
 import com.dexciuq.effective_mobile.databinding.FragmentFavoritesBinding
+import com.dexciuq.effective_mobile.domain.model.Product
+import com.dexciuq.effective_mobile.presentation.screen.catalog.CatalogFragmentDirections
 import com.dexciuq.effective_mobile.presentation.screen.catalog.ProductAdapter
 import com.dexciuq.effective_mobile.presentation.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,8 +49,15 @@ class FavoritesFragment : Fragment() {
             fragmentActivity = requireActivity(),
             onLikeClick = viewModel::addToFavorites,
             onUnlikeClick = viewModel::removeFromFavorites,
+            onItemClick = ::navigateToDetails
         )
         binding.favorites.adapter = adapter
+    }
+
+    private fun navigateToDetails(product: Product) {
+        findNavController().navigate(
+            CatalogFragmentDirections.actionCatalogFragmentToProductDetailsFragment(product)
+        )
     }
 
     private fun collectData() {

@@ -18,5 +18,9 @@
         android:id="@+id/productDetailsFragment"
         android:name="com.dexciuq.effective_mobile.presentation.screen.product_detail.ProductDetailsFragment"
         android:label="fragment_product_details"
-        tools:layout="@layout/fragment_product_details" />
+        tools:layout="@layout/fragment_product_details" >
+        <argument
+            android:name="product"
+            app:argType="com.dexciuq.effective_mobile.domain.model.Product" />
+    </fragment>
 </navigation>

@@ -18,5 +18,18 @@
         android:id="@+id/favoritesFragment"
         android:name="com.dexciuq.effective_mobile.presentation.screen.favorites.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_productDetailsFragment2"
+            app:destination="@id/productDetailsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment2"
+        android:name="com.dexciuq.effective_mobile.presentation.screen.product_detail.ProductDetailsFragment"
+        android:label="fragment_product_details"
+        tools:layout="@layout/fragment_product_details" >
+        <argument
+            android:name="product"
+            app:argType="com.dexciuq.effective_mobile.domain.model.Product" />
+    </fragment>
 </navigation>

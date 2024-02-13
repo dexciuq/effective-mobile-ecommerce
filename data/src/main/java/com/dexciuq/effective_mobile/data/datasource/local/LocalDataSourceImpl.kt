@@ -19,8 +19,8 @@ class LocalDataSourceImpl @Inject constructor(
     override suspend fun getProductList(): Flow<List<Product>> =
         productDao.getAll().map(List<ProductEntity>::toDomain)
 
-    override suspend fun getProduct(id: String): Flow<Product> =
-        productDao.getProduct(id).map(ProductEntity::toDomain)
+    override suspend fun getProduct(id: String): Product? =
+        productDao.getProduct(id)?.run(ProductEntity::toDomain)
 
     override suspend fun addToFavorites(product: Product) =
         productDao.insert(product.toEntity())

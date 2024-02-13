@@ -11,6 +11,9 @@ import com.dexciuq.effective_mobile.databinding.ItemProductBinding
 import com.dexciuq.effective_mobile.domain.model.Product
 import com.dexciuq.effective_mobile.presentation.screen.picture.PictureViewPagerAdapter
 import com.dexciuq.effective_mobile.presentation.utils.getImageById
+import com.dexciuq.effective_mobile.presentation.utils.toCount
+import com.dexciuq.effective_mobile.presentation.utils.toDiscountPercent
+import com.dexciuq.effective_mobile.presentation.utils.toMoney
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ProductAdapter(
@@ -72,11 +75,5 @@ class ProductAdapter(
 
             binding.root.setOnClickListener { onItemClick(product) }
         }
-
-        private fun Int.toCount() = "($this)"
-
-        private fun String.toMoney(unit: String) = "$this $unit"
-
-        private fun Int.toDiscountPercent() = "-$this%"
     }
 }

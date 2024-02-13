@@ -42,10 +42,14 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun getProduct(id: String): Flow<Resource<Product>> = flow {
         emit(Resource.Loading)
         try {
-            val product = remoteDataSource.getProduct(id)
-            localDataSource.getProduct(id).collect {
-                product.liked = it.liked
-                emit(Resource.Success(product))
+            val remoteProduct = remoteDataSource.getProduct(id)
+            val localProduct = localDataSource.getProduct(id)
+
+            if (localProduct == null) {
+                emit(Resource.Success(remoteProduct))
+            } else {
+                remoteProduct.liked = localProduct.liked
+                emit(Resource.Success(remoteProduct))
             }
         } catch (t: Throwable) {
             emit(Resource.Error(t))

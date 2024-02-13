@@ -1,5 +1,9 @@
 package com.dexciuq.effective_mobile.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Product(
     val id: String,
     val title: String,
@@ -12,4 +16,4 @@ data class Product(
     val description: String,
     val info: List<ProductInfo>,
     val ingredients: String,
-)
+): Parcelable

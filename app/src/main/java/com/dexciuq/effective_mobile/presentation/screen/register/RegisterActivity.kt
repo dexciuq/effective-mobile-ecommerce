@@ -12,6 +12,11 @@ import com.dexciuq.effective_mobile.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import ru.tinkoff.decoro.MaskImpl
+import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
+import ru.tinkoff.decoro.watchers.FormatWatcher
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
+
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
@@ -47,6 +52,12 @@ class RegisterActivity : AppCompatActivity() {
                 binding.surnameLayout.error = "Поля должна содержать только буквы кириллицы"
             }
         }
+
+//        val slots = UnderscoreDigitSlotsParser().parseSlots("+7 ___ ___-__-__")
+//        val formatWatcher: FormatWatcher = MaskFormatWatcher(MaskImpl.createTerminated(slots))
+//        binding.phoneLayout.editText?.let {
+//            formatWatcher.installOn(it)
+//        }
     }
 
     private fun setupListeners() {
