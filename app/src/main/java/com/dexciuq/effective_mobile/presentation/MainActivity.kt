@@ -7,8 +7,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.dexciuq.effective_mobile.R
 import com.dexciuq.effective_mobile.databinding.ActivityMainBinding
-import com.dexciuq.yummy_express.common.hide
-import com.dexciuq.yummy_express.common.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,16 +29,5 @@ class MainActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
         binding.bottomNavigationView.setupWithNavController(navController)
-
-        navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.registerFragment -> {
-                    binding.bottomNavigationView.hide()
-                }
-                else -> {
-                    binding.bottomNavigationView.show()
-                }
-            }
-        }
     }
 }

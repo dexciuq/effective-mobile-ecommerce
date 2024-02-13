@@ -7,7 +7,7 @@ import com.dexciuq.effective_mobile.domain.model.ProductInfo
 import com.dexciuq.effective_mobile.domain.model.ProductPrice
 
 @Entity(tableName = "users")
-internal data class UserEntity(
+data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,

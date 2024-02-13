@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
     private val remoteDataSource: DataSource.RemoteDataSource,
+    private val localDataSource: DataSource.LocalDataSource,
 ) : ProductRepository {
     override suspend fun getProductList(): Flow<Resource<List<Product>>> = flow {
         emit(Resource.Loading)
@@ -21,8 +22,16 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getProduct(id: String): Flow<Resource<Product>> {
-        TODO("Not yet implemented")
+    override suspend fun getProduct(id: String): Flow<Resource<Product>> = flow {
+        emit(Resource.Loading)
+        try {
+            val product = remoteDataSource.getProductList().find { it.id == id }
+                ?: error("unknown id")
+
+            emit(Resource.Success(product))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
     }
 
     override suspend fun addToFavorites(product: Product) {

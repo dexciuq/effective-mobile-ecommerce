@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dexciuq.effective_mobile.R
 import com.dexciuq.effective_mobile.common.Resource
+import com.dexciuq.effective_mobile.domain.usecase.product.GetProductListUseCase
+import com.dexciuq.effective_mobile.domain.usecase.user.GetUserUseCase
+import com.dexciuq.effective_mobile.domain.usecase.user.LogoutUserUseCase
+import com.dexciuq.effective_mobile.domain.usecase.user.SetAuthSkipUseCase
 import com.dexciuq.effective_mobile.presentation.screen.profile.ProfileAdapterModel.MenuInfo
 import com.dexciuq.effective_mobile.presentation.screen.profile.ProfileAdapterModel.ProfileInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,25 +18,23 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-//    private val getUserUseCase: GetUserUseCase
+    private val getUserUseCase: GetUserUseCase,
+    private val logoutUserUseCase: LogoutUserUseCase,
+    private val setAuthSkipUseCase: SetAuthSkipUseCase,
 ) : ViewModel() {
 
     private val _profile = MutableStateFlow<Resource<List<ProfileAdapterModel>>>(Resource.Loading)
     val profile = _profile.asStateFlow()
 
-    init {
-        getProfile()
-    }
-
-    private fun getProfile() = viewModelScope.launch {
+    fun getProfile() = viewModelScope.launch {
         val profileAdapterModels = mutableListOf<ProfileAdapterModel>()
-//        val user = getUserUseCase()
-//
+        val user = getUserUseCase()
+
         profileAdapterModels.add(
             ProfileInfo(
                 icon = R.drawable.ic_profile,
-                title = "Марина Иванова",
-                description = "+ 7 993 877 44 02",
+                title = "${user.name} ${user.surname}",
+                description = user.phoneNumber,
                 endIcon = R.drawable.ic_logout,
             )
         )
@@ -56,5 +58,10 @@ class ProfileViewModel @Inject constructor(
         )
 
         _profile.value = Resource.Success(profileAdapterModels)
+    }
+
+    fun logout() = viewModelScope.launch {
+        setAuthSkipUseCase(false)
+        logoutUserUseCase()
     }
 }

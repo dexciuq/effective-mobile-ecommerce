@@ -1,6 +1,20 @@
 package com.dexciuq.effective_mobile.data.datasource.local.db.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.dexciuq.effective_mobile.data.model.local.ProductEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface ProductDao
+interface ProductDao {
+    @Query("SELECT * FROM products")
+    fun getAll(): Flow<List<ProductEntity>>
+
+    @Query("SELECT * FROM products WHERE id = :id")
+    suspend fun getProduct(id: String): ProductEntity
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(productEntity: ProductEntity)
+}

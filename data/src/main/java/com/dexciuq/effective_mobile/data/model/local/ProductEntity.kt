@@ -9,7 +9,7 @@ import com.dexciuq.effective_mobile.domain.model.ProductInfo
 import com.dexciuq.effective_mobile.domain.model.ProductPrice
 
 @Entity(tableName = "products")
-internal data class ProductEntity(
+data class ProductEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String,

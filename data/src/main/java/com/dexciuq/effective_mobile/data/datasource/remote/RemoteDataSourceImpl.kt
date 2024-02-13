@@ -11,4 +11,8 @@ class RemoteDataSourceImpl @Inject constructor(
 ) : DataSource.RemoteDataSource {
     override suspend fun getProductList(): List<Product> =
         apiService.getProductList().items.map(ProductDto::toDomain)
+
+    override suspend fun getProduct(id: String): Product =
+        apiService.getProductList().items.find { it.id == id }?.toDomain()
+            ?: error("unknown id")
 }
