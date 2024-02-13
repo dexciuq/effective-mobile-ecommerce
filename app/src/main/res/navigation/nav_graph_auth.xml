@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.dexciuq.effective_mobile.presentation.screen.RegisterFragment"
+        android:name="com.dexciuq.effective_mobile.presentation.screen.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
 </navigation>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".presentation.screen.catalog.CatalogFragment">
+    tools:context=".presentation.screen.favorites.FavoritesFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -20,8 +20,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/catalog"
-            app:titleCentered="true"
+            app:title="Избранное"
+            app:navigationIcon="@drawable/ic_back"
             app:titleTextAppearance="@style/ToolbarTextAppearance" />
 
     </com.google.android.material.appbar.AppBarLayout>

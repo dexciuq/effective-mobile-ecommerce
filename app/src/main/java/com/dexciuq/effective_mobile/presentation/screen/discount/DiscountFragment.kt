@@ -1,4 +1,4 @@
-package com.dexciuq.effective_mobile.presentation.screen
+package com.dexciuq.effective_mobile.presentation.screen.discount
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,12 @@ import com.dexciuq.effective_mobile.databinding.FragmentDiscountBinding
 
 class DiscountFragment : Fragment() {
 
-    private lateinit var binding: FragmentDiscountBinding
+    private val binding by lazy { FragmentDiscountBinding.inflate(layoutInflater) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDiscountBinding.inflate(inflater, container, false)
         return binding.root
     }
 }

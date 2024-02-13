@@ -1,4 +1,4 @@
-package com.dexciuq.effective_mobile.presentation.screen
+package com.dexciuq.effective_mobile.presentation.screen.register
 
 import android.os.Bundle
 import android.view.LayoutInflater

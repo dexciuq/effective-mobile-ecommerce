@@ -1,21 +1,20 @@
-package com.dexciuq.effective_mobile.presentation.screen
+package com.dexciuq.effective_mobile.presentation.screen.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.dexciuq.effective_mobile.databinding.FragmentProfileBinding
+import com.dexciuq.effective_mobile.databinding.FragmentHomeBinding
 
-class ProfileFragment : Fragment() {
+class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+    private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 }

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.screen.CartFragment">
+    android:background="@color/background"
+    tools:context=".presentation.screen.cart.CartFragment">
 
     <TextView
         android:layout_width="match_parent"

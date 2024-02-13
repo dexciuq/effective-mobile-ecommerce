@@ -1,21 +1,20 @@
-package com.dexciuq.effective_mobile.presentation.screen
+package com.dexciuq.effective_mobile.presentation.screen.cart
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.dexciuq.effective_mobile.databinding.FragmentHomeBinding
+import com.dexciuq.effective_mobile.databinding.FragmentCartBinding
 
-class HomeFragment : Fragment() {
+class CartFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private val binding by lazy { FragmentCartBinding.inflate(layoutInflater) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 }

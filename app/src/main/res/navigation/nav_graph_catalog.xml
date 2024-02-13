@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/catalogFragment"
-        android:name="com.dexciuq.effective_mobile.presentation.screen.CatalogFragment"
+        android:name="com.dexciuq.effective_mobile.presentation.screen.catalog.CatalogFragment"
         android:label="fragment_catalog"
         tools:layout="@layout/fragment_catalog" />
 </navigation>
