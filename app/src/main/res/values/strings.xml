@@ -15,4 +15,8 @@
     <string name="logout">Выйти</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hide">Скрыть</string>
+    <string name="more_detail">Подробнее</string>
+    <string name="descriptioin">Описание</string>
+    <string name="characteristics">Характеристики</string>
 </resources>

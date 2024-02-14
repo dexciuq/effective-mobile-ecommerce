@@ -8,18 +8,14 @@ sealed class ProductDetailsAdapterModel {
     ) : ProductDetailsAdapterModel()
 
     data class Description(
-        private val product: Product,
+        val product: Product,
     ) : ProductDetailsAdapterModel()
 
     data class Characteristics(
-        private val product: Product,
+        val product: Product,
     ) : ProductDetailsAdapterModel()
 
     data class Ingredients(
-        private val product: Product,
-    ) : ProductDetailsAdapterModel()
-
-    data class BuyButton(
-        private val product: Product,
+        val product: Product,
     ) : ProductDetailsAdapterModel()
 }

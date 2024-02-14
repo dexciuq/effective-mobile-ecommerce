@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.dexciuq.effective_mobile.common.Resource
 import com.dexciuq.effective_mobile.domain.model.Product
 import com.dexciuq.effective_mobile.domain.usecase.product.AddToFavoritesUseCase
-import com.dexciuq.effective_mobile.domain.usecase.product.GetProductUseCase
 import com.dexciuq.effective_mobile.domain.usecase.product.RemoveFromFavoritesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,13 +18,17 @@ class ProductDetailsViewModel @Inject constructor(
     private val removeFromFavoritesUseCase: RemoveFromFavoritesUseCase,
 ) : ViewModel() {
 
-    private val _productInfoList = MutableStateFlow<Resource<List<ProductDetailsAdapterModel>>>(Resource.Loading)
+    private val _productInfoList =
+        MutableStateFlow<Resource<List<ProductDetailsAdapterModel>>>(Resource.Loading)
     val productInfo = _productInfoList.asStateFlow()
 
     fun getProductInfo(product: Product) = viewModelScope.launch {
         val result = mutableListOf<ProductDetailsAdapterModel>()
 
         result.add(ProductDetailsAdapterModel.Information(product))
+        result.add(ProductDetailsAdapterModel.Description(product))
+        result.add(ProductDetailsAdapterModel.Characteristics(product))
+        result.add(ProductDetailsAdapterModel.Ingredients(product))
 
         _productInfoList.value = Resource.Success(result)
     }

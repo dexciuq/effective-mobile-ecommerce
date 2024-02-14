@@ -56,7 +56,7 @@ class FavoritesFragment : Fragment() {
 
     private fun navigateToDetails(product: Product) {
         findNavController().navigate(
-            CatalogFragmentDirections.actionCatalogFragmentToProductDetailsFragment(product)
+            FavoritesFragmentDirections.actionFavoritesFragmentToProductDetailsFragment2(product)
         )
     }
 
